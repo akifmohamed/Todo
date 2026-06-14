@@ -2107,7 +2107,8 @@ function showToast(msg) {
    SEED DATA
 ══════════════════════════════════════════════════════════════════ */
 function seedData() {
-  if (state.tasks.length) return;
+  if (localStorage.getItem('taskly_seeded')) return;
+  localStorage.setItem('taskly_seeded', 'true');
 
   const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
   const inHour   = new Date(); inHour.setHours(inHour.getHours() + 1);
