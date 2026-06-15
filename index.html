@@ -5,30 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <title>Taskly – Get Things Done</title>
 
+<!-- ⚠️ CHANGE THIS VERSION NUMBER WHEN YOU UPDATE THE APP ⚠️ -->
+<meta name="app-version" content="1.0.0" />
+
 <!-- ═══════════════ PWA META TAGS ═══════════════ -->
 <meta name="theme-color" content="#2563EB" />
 <meta name="description" content="Taskly - Professional todo app with recurring tasks, analytics, and smart reminders" />
-
-<!-- iOS PWA Support -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="Taskly" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="application-name" content="Taskly" />
 
-<!-- Favicon (SVG) -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231E3A8A'/%3E%3Cstop offset='100%25' stop-color='%232563EB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cpath d='M25 75 Q35 65 55 65 T85 60' stroke='%2360A5FA' stroke-width='4' fill='none' stroke-linecap='round' opacity='0.6'/%3E%3Cpath d='M22 50 L42 70 L78 30' stroke='white' stroke-width='11' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
 
-<!-- Apple Touch Icons (multiple sizes) -->
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231E3A8A'/%3E%3Cstop offset='100%25' stop-color='%232563EB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Cpath d='M45 135 Q63 117 99 117 T153 108' stroke='%2360A5FA' stroke-width='7' fill='none' stroke-linecap='round' opacity='0.6'/%3E%3Cpath d='M40 90 L76 126 L140 54' stroke='white' stroke-width='20' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
 
-<!-- iOS Splash Screen Images (for various devices) -->
-<link rel="apple-touch-startup-image" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 750 1334'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231E3A8A'/%3E%3Cstop offset='50%25' stop-color='%232563EB'/%3E%3Cstop offset='100%25' stop-color='%233B82F6'/%3E%3C/linearGradient%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231E3A8A'/%3E%3Cstop offset='100%25' stop-color='%232563EB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='750' height='1334' fill='url(%23b)'/%3E%3Cg transform='translate(295,567)'%3E%3Crect width='160' height='160' rx='36' fill='url(%23g)'/%3E%3Cpath d='M40 120 Q56 104 88 104 T136 96' stroke='%2360A5FA' stroke-width='6' fill='none' stroke-linecap='round' opacity='0.6'/%3E%3Cpath d='M36 80 L68 112 L124 48' stroke='white' stroke-width='18' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Ctext x='375' y='800' text-anchor='middle' fill='white' font-family='sans-serif' font-size='48' font-weight='800'%3ETaskly%3C/text%3E%3C/svg%3E" />
-
-<!-- Web App Manifest (embedded via blob) -->
 <link rel="manifest" id="manifestLink" />
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
 <style>
   :root {
     --bg:        #0F1117;
@@ -65,10 +60,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    overscroll-behavior: none;
-    -webkit-tap-highlight-color: transparent;
-  }
+  html, body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: var(--font);
     background: var(--bg);
@@ -90,32 +82,19 @@
   input:focus, textarea:focus, select:focus { border-color: var(--accent); }
   select option { background: var(--surface); }
 
-  /* ═══════════════════════════════════════════════════
-     SPLASH SCREEN
-  ═══════════════════════════════════════════════════ */
+  /* SPLASH SCREEN */
   #splashScreen {
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #3B82F6 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     z-index: 9999;
     transition: opacity .6s cubic-bezier(.4,0,.2,1), visibility .6s;
-    padding-top: var(--safe-top);
-    padding-bottom: var(--safe-bottom);
+    padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
   }
-  #splashScreen.hidden-splash {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
+  #splashScreen.hidden-splash { opacity: 0; visibility: hidden; pointer-events: none; }
 
   .splash-logo-wrap {
-    position: relative;
-    width: 130px;
-    height: 130px;
+    position: relative; width: 130px; height: 130px;
     animation: logoEntry 1.2s cubic-bezier(.34,1.56,.64,1) forwards;
   }
   @keyframes logoEntry {
@@ -123,139 +102,132 @@
     60% { transform: scale(1.15) rotate(15deg); opacity: 1; }
     100% { transform: scale(1) rotate(0); opacity: 1; }
   }
-
   .splash-logo {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     background: linear-gradient(135deg, #1E3A8A, #2563EB);
     border-radius: 28px;
     box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 80px rgba(96,165,250,.4);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
   }
   .splash-logo::before {
-    content: '';
-    position: absolute;
-    bottom: 18%;
-    left: -10%;
-    width: 120%;
-    height: 30%;
+    content: ''; position: absolute;
+    bottom: 18%; left: -10%; width: 120%; height: 30%;
     background:
       radial-gradient(ellipse at left, rgba(96,165,250,.6) 0%, transparent 60%),
       radial-gradient(ellipse at center, rgba(147,197,253,.5) 0%, transparent 60%);
-    transform: rotate(-8deg);
-    border-radius: 50%;
+    transform: rotate(-8deg); border-radius: 50%;
     animation: swooshFlow 2s ease-in-out infinite;
   }
   @keyframes swooshFlow {
     0%, 100% { transform: rotate(-8deg) translateX(0); opacity: .7; }
     50% { transform: rotate(-5deg) translateX(8px); opacity: 1; }
   }
-
-  .splash-check {
-    width: 70px;
-    height: 70px;
-    position: relative;
-    z-index: 2;
-  }
-  .splash-check svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,.3));
-  }
+  .splash-check { width: 70px; height: 70px; position: relative; z-index: 2; }
+  .splash-check svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 8px rgba(0,0,0,.3)); }
   .splash-check path {
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
+    stroke-dasharray: 100; stroke-dashoffset: 100;
     animation: drawCheck .7s ease forwards .6s;
   }
-  @keyframes drawCheck {
-    to { stroke-dashoffset: 0; }
-  }
+  @keyframes drawCheck { to { stroke-dashoffset: 0; } }
 
   .splash-text {
-    margin-top: 32px;
-    font-size: 32px;
-    font-weight: 800;
-    color: white;
-    letter-spacing: -.5px;
-    opacity: 0;
-    animation: fadeUp .6s ease forwards 1s;
+    margin-top: 32px; font-size: 32px; font-weight: 800;
+    color: white; letter-spacing: -.5px;
+    opacity: 0; animation: fadeUp .6s ease forwards 1s;
   }
   .splash-text span { color: #93C5FD; }
   .splash-tagline {
-    margin-top: 6px;
-    font-size: 13px;
-    color: rgba(255,255,255,.7);
-    font-weight: 500;
-    letter-spacing: 1px;
-    opacity: 0;
-    animation: fadeUp .6s ease forwards 1.2s;
+    margin-top: 6px; font-size: 13px;
+    color: rgba(255,255,255,.7); font-weight: 500; letter-spacing: 1px;
+    opacity: 0; animation: fadeUp .6s ease forwards 1.2s;
   }
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   .splash-loader {
-    margin-top: 40px;
-    width: 40px;
-    height: 40px;
-    opacity: 0;
-    animation: fadeUp .4s ease forwards 1.4s;
+    margin-top: 40px; width: 40px; height: 40px;
+    opacity: 0; animation: fadeUp .4s ease forwards 1.4s;
   }
   .splash-loader::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 3px solid rgba(255,255,255,.2);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin .8s linear infinite;
+    content: ''; display: block; width: 100%; height: 100%;
+    border: 3px solid rgba(255,255,255,.2); border-top-color: white;
+    border-radius: 50%; animation: spin .8s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-
   .splash-version {
-    position: absolute;
-    bottom: calc(20px + var(--safe-bottom));
-    font-size: 11px;
-    color: rgba(255,255,255,.4);
-    letter-spacing: 1px;
-    font-weight: 500;
+    position: absolute; bottom: calc(20px + var(--safe-bottom));
+    font-size: 11px; color: rgba(255,255,255,.4);
+    letter-spacing: 1px; font-weight: 500;
   }
 
-  /* App entry animation */
   #app {
-    opacity: 0;
-    transform: scale(.95);
+    opacity: 0; transform: scale(.95);
     transition: opacity .6s ease, transform .6s ease;
   }
-  #app.ready {
-    opacity: 1;
-    transform: scale(1);
-  }
+  #app.ready { opacity: 1; transform: scale(1); }
 
   /* ═══════════════════════════════════════════════════
-     INSTALL PROMPT
+     UPDATE NOTIFICATION BANNER
   ═══════════════════════════════════════════════════ */
+  #updateBanner {
+    position: fixed;
+    top: calc(20px + var(--safe-top));
+    left: 20px; right: 20px;
+    max-width: 390px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #22D3A5, #10B981);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    z-index: 500;
+    box-shadow: 0 12px 40px rgba(34,211,165,.4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateY(-150%);
+    transition: transform .5s cubic-bezier(.34,1.56,.64,1);
+    cursor: pointer;
+  }
+  #updateBanner.show { transform: translateY(0); animation: pulseGlow 2s ease-in-out infinite; }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 12px 40px rgba(34,211,165,.4); }
+    50% { box-shadow: 0 12px 50px rgba(34,211,165,.7); }
+  }
+  .update-icon {
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,.25);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 20px;
+    animation: spinSlow 2s linear infinite;
+  }
+  @keyframes spinSlow { to { transform: rotate(360deg); } }
+  .update-body { flex: 1; color: white; }
+  .update-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .update-desc { font-size: 11px; opacity: 0.9; line-height: 1.3; }
+  .update-btn {
+    padding: 8px 14px;
+    background: white;
+    color: #10B981;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* INSTALL PROMPT */
   #installPrompt {
     position: fixed;
     bottom: calc(100px + var(--safe-bottom));
-    left: 20px;
-    right: 20px;
-    max-width: 390px;
-    margin: 0 auto;
+    left: 20px; right: 20px;
+    max-width: 390px; margin: 0 auto;
     background: linear-gradient(135deg, #1E3A8A, #2563EB);
     border-radius: var(--radius);
     padding: 16px 18px;
     z-index: 150;
     box-shadow: 0 12px 40px rgba(37,99,235,.5);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex; align-items: center; gap: 12px;
     transform: translateY(120%);
     transition: transform .4s cubic-bezier(.4,0,.2,1);
   }
@@ -264,53 +236,32 @@
     width: 44px; height: 44px;
     background: rgba(255,255,255,.2);
     border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 22px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 22px;
   }
   .install-body { flex: 1; color: white; }
   .install-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
   .install-desc { font-size: 11px; opacity: 0.85; line-height: 1.3; }
   .install-buttons { display: flex; gap: 6px; flex-shrink: 0; flex-direction: column; }
   .install-btn {
-    padding: 7px 14px;
-    background: white;
-    color: var(--brand-blue);
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    border: none;
+    padding: 7px 14px; background: white; color: var(--brand-blue);
+    border-radius: 8px; font-size: 12px; font-weight: 700;
   }
   .install-dismiss {
-    padding: 5px;
-    color: rgba(255,255,255,.7);
-    font-size: 10px;
-    background: transparent;
-    text-decoration: underline;
+    padding: 5px; color: rgba(255,255,255,.7);
+    font-size: 10px; background: transparent; text-decoration: underline;
   }
 
-  /* iOS install instructions modal */
   #iosInstallModal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.7);
-    backdrop-filter: blur(6px);
-    z-index: 300;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.7); backdrop-filter: blur(6px);
+    z-index: 300; display: none;
+    align-items: center; justify-content: center; padding: 20px;
   }
   #iosInstallModal.show { display: flex; }
   .ios-install-card {
-    background: var(--surface);
-    border-radius: 20px;
-    padding: 24px;
-    max-width: 360px;
-    width: 100%;
-    text-align: center;
+    background: var(--surface); border-radius: 20px; padding: 24px;
+    max-width: 360px; width: 100%; text-align: center;
     animation: scaleIn .3s ease;
   }
   @keyframes scaleIn {
@@ -320,58 +271,35 @@
   .ios-install-card h3 { font-size: 18px; margin-bottom: 8px; }
   .ios-install-card p { font-size: 13px; color: var(--text2); margin-bottom: 16px; line-height: 1.5; }
   .ios-step {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    background: var(--surface2);
-    border-radius: 10px;
-    margin-bottom: 8px;
-    text-align: left;
-    font-size: 13px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px; background: var(--surface2);
+    border-radius: 10px; margin-bottom: 8px;
+    text-align: left; font-size: 13px;
   }
   .ios-step-num {
     width: 28px; height: 28px;
-    background: var(--brand-blue);
-    color: white;
+    background: var(--brand-blue); color: white;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 13px;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; flex-shrink: 0;
   }
   .ios-step svg { width: 18px; height: 18px; flex-shrink: 0; }
   .ios-close {
-    margin-top: 14px;
-    width: 100%;
-    padding: 12px;
-    background: var(--brand-blue);
-    color: white;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 14px;
+    margin-top: 14px; width: 100%; padding: 12px;
+    background: var(--brand-blue); color: white;
+    border-radius: 10px; font-weight: 700; font-size: 14px;
   }
 
-  /* ═══════════════════════════════════════════════════
-     APP LAYOUT
-  ═══════════════════════════════════════════════════ */
+  /* APP LAYOUT */
   #app {
-    max-width: 430px;
-    margin: 0 auto;
+    max-width: 430px; margin: 0 auto;
     min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
   }
-
   header {
     padding: 20px 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     flex-shrink: 0;
   }
   .logo-row { display: flex; align-items: center; gap: 10px; }
@@ -379,20 +307,13 @@
     width: 36px; height: 36px;
     background: linear-gradient(135deg, #1E3A8A, #2563EB);
     border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
     box-shadow: 0 4px 12px rgba(37,99,235,.4);
   }
   .logo-icon::before {
-    content: '';
-    position: absolute;
-    bottom: 15%;
-    left: -10%;
-    width: 120%;
-    height: 30%;
+    content: ''; position: absolute;
+    bottom: 15%; left: -10%; width: 120%; height: 30%;
     background: radial-gradient(ellipse at center, rgba(96,165,250,.7) 0%, transparent 70%);
     transform: rotate(-8deg);
   }
@@ -403,12 +324,16 @@
   }
   .logo { font-size: 22px; font-weight: 800; letter-spacing: -.5px; }
   .logo span { color: var(--brand-blue); }
+  .version-tag {
+    font-size: 9px; color: var(--text3);
+    background: var(--surface2); padding: 2px 6px;
+    border-radius: 4px; margin-left: 6px;
+    font-weight: 600; letter-spacing: .5px;
+  }
   .header-actions { display: flex; gap: 10px; }
   .icon-btn {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1.5px solid var(--border);
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--surface); border: 1.5px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-size: 17px;
     transition: background var(--transition), transform var(--transition);
@@ -416,33 +341,25 @@
   .icon-btn:hover { background: var(--surface2); transform: scale(1.08); }
 
   .nav {
-    display: flex;
-    gap: 6px;
-    padding: 16px 20px 0;
-    flex-shrink: 0;
+    display: flex; gap: 6px;
+    padding: 16px 20px 0; flex-shrink: 0;
   }
   .nav-btn {
-    flex: 1;
-    padding: 9px 4px;
+    flex: 1; padding: 9px 4px;
     border-radius: var(--radius-sm);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text2);
-    background: var(--surface);
+    font-size: 12px; font-weight: 600;
+    color: var(--text2); background: var(--surface);
     border: 1.5px solid var(--border);
-    transition: all var(--transition);
-    letter-spacing: .3px;
+    transition: all var(--transition); letter-spacing: .3px;
   }
   .nav-btn.active {
-    background: var(--accent);
-    color: #fff;
+    background: var(--accent); color: #fff;
     border-color: var(--accent);
     box-shadow: 0 4px 16px rgba(108,99,255,.35);
   }
 
   main {
-    flex: 1;
-    overflow-y: auto;
+    flex: 1; overflow-y: auto;
     padding: 16px 20px 100px;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -452,9 +369,7 @@
   main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
   .section-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     margin: 18px 0 10px;
   }
   .section-head h2 { font-size: 16px; font-weight: 700; }
@@ -465,18 +380,13 @@
   }
 
   .summary-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 6px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-bottom: 6px;
   }
   .summary-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 10px;
-    text-align: center;
-    transition: transform var(--transition);
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 14px 10px;
+    text-align: center; transition: transform var(--transition);
   }
   .summary-card:hover { transform: translateY(-2px); }
   .summary-card .num { font-size: 28px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
@@ -486,20 +396,14 @@
   .c-warn { color: var(--warn); }
 
   .progress-bar-wrap {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-bottom: 10px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px;
   }
   .progress-bar-wrap .label-row {
     display: flex; justify-content: space-between;
     font-size: 13px; font-weight: 600; margin-bottom: 10px;
   }
-  .progress-track {
-    height: 10px; background: var(--surface2);
-    border-radius: 10px; overflow: hidden;
-  }
+  .progress-track { height: 10px; background: var(--surface2); border-radius: 10px; overflow: hidden; }
   .progress-fill {
     height: 100%; border-radius: 10px;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
@@ -507,10 +411,8 @@
   }
 
   .chart-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px; margin-bottom: 10px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 16px; margin-bottom: 10px;
   }
   .chart-card h3 {
     font-size: 13px; font-weight: 700; color: var(--text2);
@@ -519,15 +421,13 @@
   .chart-container { position: relative; height: 160px; }
 
   .insight-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: grid; grid-template-columns: 1fr 1fr;
     gap: 10px; margin-bottom: 10px;
   }
   .insight-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px; display: flex; align-items: center; gap: 12px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 14px;
+    display: flex; align-items: center; gap: 12px;
   }
   .insight-icon { font-size: 26px; flex-shrink: 0; }
   .insight-text .val { font-size: 20px; font-weight: 800; line-height: 1; }
@@ -548,51 +448,33 @@
   .filter-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
   .task-card-wrap {
-    position: relative;
-    margin-bottom: 10px;
-    border-radius: var(--radius);
-    overflow: hidden;
+    position: relative; margin-bottom: 10px;
+    border-radius: var(--radius); overflow: hidden;
     animation: cardSlideIn .35s cubic-bezier(.4,0,.2,1) backwards;
   }
   @keyframes cardSlideIn {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   .swipe-actions {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: linear-gradient(90deg, transparent 0%, rgba(248,113,113,.1) 30%, var(--danger) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 24px;
-    border-radius: var(--radius);
-    z-index: 0;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 24px; border-radius: var(--radius); z-index: 0;
   }
   .swipe-action-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #fff;
-    font-weight: 700;
-    font-size: 12px;
-    gap: 4px;
+    display: flex; flex-direction: column; align-items: center;
+    color: #fff; font-weight: 700; font-size: 12px; gap: 4px;
   }
   .swipe-action-content .icon { font-size: 22px; }
 
   .task-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 14px 12px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 14px 14px 12px;
     position: relative;
     transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
-    cursor: pointer;
-    overflow: hidden;
-    touch-action: pan-y;
-    z-index: 1;
-    will-change: transform;
+    cursor: pointer; overflow: hidden;
+    touch-action: pan-y; z-index: 1; will-change: transform;
   }
   .task-card.swiping { transition: none; }
   .task-card-wrap.collapsing {
@@ -654,12 +536,8 @@
     padding-left: 8px; justify-content: space-between; align-items: center;
   }
   .swipe-hint {
-    font-size: 10px;
-    color: var(--text3);
-    font-style: italic;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-size: 10px; color: var(--text3); font-style: italic;
+    display: flex; align-items: center; gap: 4px;
   }
   .task-action-btn {
     font-size: 11px; font-weight: 600; padding: 4px 10px;
@@ -685,7 +563,8 @@
   .empty-state p { font-size: 14px; line-height: 1.6; }
 
   .fab {
-    position: fixed; bottom: calc(32px + var(--safe-bottom)); left: 50%; transform: translateX(-50%);
+    position: fixed; bottom: calc(32px + var(--safe-bottom));
+    left: 50%; transform: translateX(-50%);
     width: 56px; height: 56px; border-radius: 50%;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
     box-shadow: 0 8px 24px rgba(108,99,255,.5);
@@ -760,7 +639,6 @@
     font-size: 13px; color: var(--accent); font-weight: 600;
     padding: 6px 0; margin-top: 4px;
   }
-
   .submit-btn {
     width: 100%; padding: 14px; border-radius: var(--radius);
     background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -772,10 +650,8 @@
   .submit-btn:active { transform: scale(.97); }
 
   .repeat-section {
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    padding: 14px;
-    border: 1.5px solid var(--border);
+    background: var(--surface2); border-radius: var(--radius-sm);
+    padding: 14px; border: 1.5px solid var(--border);
   }
   .repeat-section h4 {
     font-size: 13px; font-weight: 700; margin-bottom: 12px;
@@ -786,7 +662,7 @@
     padding: 7px 14px; border-radius: 20px;
     font-size: 12px; font-weight: 600;
     background: var(--surface); border: 1.5px solid var(--border);
-    color: var(--text2); transition: all var(--transition); cursor: pointer;
+    color: var(--text2); transition: all var(--transition);
   }
   .repeat-type-chip.active {
     background: rgba(108,99,255,.15); border-color: var(--accent); color: var(--accent);
@@ -807,7 +683,7 @@
     width: 38px; height: 38px; border-radius: 50%;
     font-size: 12px; font-weight: 700;
     background: var(--surface); border: 1.5px solid var(--border);
-    color: var(--text2); transition: all var(--transition); cursor: pointer;
+    color: var(--text2); transition: all var(--transition);
     display: flex; align-items: center; justify-content: center;
   }
   .weekday-btn.active {
@@ -839,9 +715,7 @@
   .end-option-input input[type="number"] {
     width: 65px; padding: 6px 10px; font-size: 13px; text-align: center;
   }
-  .end-option-input input[type="date"] {
-    padding: 6px 10px; font-size: 13px;
-  }
+  .end-option-input input[type="date"] { padding: 6px 10px; font-size: 13px; }
   .repeat-summary {
     margin-top: 12px; padding: 10px 12px;
     background: rgba(108,99,255,.08);
@@ -864,15 +738,14 @@
   }
 
   .toast-container {
-    position: fixed; top: calc(20px + var(--safe-top)); left: 50%; transform: translateX(-50%);
+    position: fixed; top: calc(70px + var(--safe-top));
+    left: 50%; transform: translateX(-50%);
     z-index: 999; display: flex; flex-direction: column;
     align-items: center; gap: 8px; pointer-events: none;
   }
   .toast {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    padding: 12px 20px;
-    border-radius: var(--radius);
+    background: var(--surface); border: 1.5px solid var(--border);
+    padding: 12px 20px; border-radius: var(--radius);
     font-size: 13px; font-weight: 600;
     box-shadow: var(--shadow);
     animation: toastIn .3s ease forwards;
@@ -881,25 +754,16 @@
   }
   .toast.out { animation: toastOut .3s ease forwards; }
   .toast button {
-    margin-left: 8px;
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 12px;
+    margin-left: 8px; color: var(--accent);
+    font-weight: 700; font-size: 12px;
   }
   @keyframes toastIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes toastOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
 
   .hidden { display: none !important; }
+  #confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
-  #confetti-canvas {
-    position: fixed; inset: 0; pointer-events: none; z-index: 999;
-  }
-
-  .search-bar {
-    padding: 0 20px;
-    margin-top: 12px;
-    flex-shrink: 0;
-  }
+  .search-bar { padding: 0 20px; margin-top: 12px; flex-shrink: 0; }
   .search-bar input {
     width: 100%; padding: 10px 14px; font-size: 14px;
     border-radius: var(--radius); background: var(--surface);
@@ -907,7 +771,6 @@
   }
   .search-bar input::placeholder { color: var(--text3); }
 
-  /* PWA standalone-mode tweaks */
   @media (display-mode: standalone) {
     body { user-select: none; -webkit-user-select: none; }
     .swipe-hint { display: none; }
@@ -916,7 +779,7 @@
 </head>
 <body>
 
-<!-- ═══════════════════ SPLASH SCREEN ═══════════════════ -->
+<!-- SPLASH SCREEN -->
 <div id="splashScreen">
   <div class="splash-logo-wrap">
     <div class="splash-logo">
@@ -930,10 +793,20 @@
   <div class="splash-text">Task<span>ly</span></div>
   <div class="splash-tagline">GET THINGS DONE</div>
   <div class="splash-loader"></div>
-  <div class="splash-version">v1.0.0</div>
+  <div class="splash-version" id="splashVersion">v1.0.0</div>
 </div>
 
-<!-- ═══════════════════ INSTALL PROMPT ═══════════════════ -->
+<!-- UPDATE NOTIFICATION BANNER -->
+<div id="updateBanner">
+  <div class="update-icon">🔄</div>
+  <div class="update-body">
+    <div class="update-title">New version available!</div>
+    <div class="update-desc">Tap to update to the latest version</div>
+  </div>
+  <button class="update-btn" id="updateBtn">Update</button>
+</div>
+
+<!-- INSTALL PROMPT -->
 <div id="installPrompt">
   <div class="install-icon">📲</div>
   <div class="install-body">
@@ -946,7 +819,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════ iOS INSTALL MODAL ═══════════════════ -->
+<!-- iOS INSTALL MODAL -->
 <div id="iosInstallModal">
   <div class="ios-install-card">
     <h3>📲 Install Taskly</h3>
@@ -970,7 +843,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════ MAIN APP ═══════════════════ -->
+<!-- MAIN APP -->
 <div id="app">
   <header>
     <div class="logo-row">
@@ -979,7 +852,7 @@
           <path d="M22 50 L42 70 L78 30" stroke="white" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <div class="logo">Task<span>ly</span></div>
+      <div class="logo">Task<span>ly</span><span class="version-tag" id="versionTag">v1.0.0</span></div>
     </div>
     <div class="header-actions">
       <button class="icon-btn" id="themeToggle" title="Toggle theme">🌙</button>
@@ -1018,52 +891,26 @@
     <div id="tab-dashboard" class="hidden">
       <div class="section-head"><h2>Dashboard</h2></div>
       <div class="summary-row">
-        <div class="summary-card">
-          <div class="num c-accent" id="statTotal">0</div>
-          <div class="lbl">Total</div>
-        </div>
-        <div class="summary-card">
-          <div class="num c-success" id="statDone">0</div>
-          <div class="lbl">Done</div>
-        </div>
-        <div class="summary-card">
-          <div class="num c-warn" id="statPending">0</div>
-          <div class="lbl">Pending</div>
-        </div>
+        <div class="summary-card"><div class="num c-accent" id="statTotal">0</div><div class="lbl">Total</div></div>
+        <div class="summary-card"><div class="num c-success" id="statDone">0</div><div class="lbl">Done</div></div>
+        <div class="summary-card"><div class="num c-warn" id="statPending">0</div><div class="lbl">Pending</div></div>
       </div>
       <div class="progress-bar-wrap">
-        <div class="label-row">
-          <span>Completion</span>
-          <span id="progressPct">0%</span>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="progressFill" style="width:0%"></div>
-        </div>
+        <div class="label-row"><span>Completion</span><span id="progressPct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
       </div>
       <div class="insight-grid">
         <div class="insight-card">
           <div class="insight-icon">🔥</div>
-          <div class="insight-text">
-            <div class="val" id="streakVal">0</div>
-            <div class="desc">Day Streak</div>
-          </div>
+          <div class="insight-text"><div class="val" id="streakVal">0</div><div class="desc">Day Streak</div></div>
         </div>
         <div class="insight-card">
           <div class="insight-icon">🔄</div>
-          <div class="insight-text">
-            <div class="val" id="recurringVal">0</div>
-            <div class="desc">Recurring</div>
-          </div>
+          <div class="insight-text"><div class="val" id="recurringVal">0</div><div class="desc">Recurring</div></div>
         </div>
       </div>
-      <div class="chart-card">
-        <h3>Tasks by Priority</h3>
-        <div class="chart-container"><canvas id="priorityChart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <h3>Weekly Activity</h3>
-        <div class="chart-container"><canvas id="weeklyChart"></canvas></div>
-      </div>
+      <div class="chart-card"><h3>Tasks by Priority</h3><div class="chart-container"><canvas id="priorityChart"></canvas></div></div>
+      <div class="chart-card"><h3>Weekly Activity</h3><div class="chart-container"><canvas id="weeklyChart"></canvas></div></div>
     </div>
 
     <div id="tab-calendar" class="hidden">
@@ -1075,6 +922,7 @@
   <button class="fab" id="addTaskBtn" title="Add Task">+</button>
 </div>
 
+<!-- TASK MODAL -->
 <div class="overlay" id="taskModal">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -1088,14 +936,8 @@
       <textarea id="taskDesc" placeholder="Add details..."></textarea>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label>Due Date</label>
-        <input type="date" id="taskDue" />
-      </div>
-      <div class="form-group">
-        <label>Due Time</label>
-        <input type="time" id="taskTime" />
-      </div>
+      <div class="form-group"><label>Due Date</label><input type="date" id="taskDue" /></div>
+      <div class="form-group"><label>Due Time</label><input type="time" id="taskTime" /></div>
     </div>
     <div class="form-group">
       <label>Category</label>
@@ -1159,9 +1001,7 @@
           <div class="end-option-row" onclick="setRepeatEnd('date')">
             <div class="end-radio" id="endDateRadio"></div>
             <span class="end-option-label">On date</span>
-            <div class="end-option-input">
-              <input type="date" id="repeatEndDate" onchange="updateRepeatSummary()" />
-            </div>
+            <div class="end-option-input"><input type="date" id="repeatEndDate" onchange="updateRepeatSummary()" /></div>
           </div>
           <div class="end-option-row" onclick="setRepeatEnd('count')">
             <div class="end-radio" id="endCountRadio"></div>
@@ -1202,7 +1042,14 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════
-// PWA SETUP - Manifest + Service Worker
+// 🔢 APP VERSION - INCREMENT THIS EVERY TIME YOU UPDATE!
+// ═══════════════════════════════════════════════════════════
+const APP_VERSION = document.querySelector('meta[name="app-version"]').content;
+document.getElementById('splashVersion').textContent = 'v' + APP_VERSION;
+document.getElementById('versionTag').textContent = 'v' + APP_VERSION;
+
+// ═══════════════════════════════════════════════════════════
+// PWA MANIFEST
 // ═══════════════════════════════════════════════════════════
 const manifestData = {
   name: "Taskly - Get Things Done",
@@ -1213,48 +1060,175 @@ const manifestData = {
   orientation: "portrait",
   background_color: "#1E3A8A",
   theme_color: "#2563EB",
-  icons: [
-    {
-      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231E3A8A'/%3E%3Cstop offset='100%25' stop-color='%232563EB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='115' fill='url(%23g)'/%3E%3Cpath d='M128 384 Q179 333 281 333 T435 308' stroke='%2360A5FA' stroke-width='20' fill='none' stroke-linecap='round' opacity='0.6'/%3E%3Cpath d='M115 256 L215 358 L397 154' stroke='white' stroke-width='56' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
-      sizes: "any",
-      type: "image/svg+xml",
-      purpose: "any maskable"
-    }
-  ]
+  icons: [{
+    src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231E3A8A'/%3E%3Cstop offset='100%25' stop-color='%232563EB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='115' fill='url(%23g)'/%3E%3Cpath d='M128 384 Q179 333 281 333 T435 308' stroke='%2360A5FA' stroke-width='20' fill='none' stroke-linecap='round' opacity='0.6'/%3E%3Cpath d='M115 256 L215 358 L397 154' stroke='white' stroke-width='56' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
+    sizes: "any",
+    type: "image/svg+xml",
+    purpose: "any maskable"
+  }]
 };
 const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
-const manifestUrl = URL.createObjectURL(manifestBlob);
-document.getElementById('manifestLink').setAttribute('href', manifestUrl);
+document.getElementById('manifestLink').setAttribute('href', URL.createObjectURL(manifestBlob));
 
-// Service worker as data URL (inline)
+// ═══════════════════════════════════════════════════════════
+// 🚀 SERVICE WORKER WITH AUTO-UPDATE
+// ═══════════════════════════════════════════════════════════
 const swCode = `
-const CACHE_NAME = 'taskly-v1';
+const APP_VERSION = '${APP_VERSION}';
+const CACHE_NAME = 'taskly-v' + APP_VERSION;
+
 self.addEventListener('install', e => {
-  self.skipWaiting();
+  console.log('[SW] Installing version', APP_VERSION);
+  self.skipWaiting(); // Activate immediately
 });
+
 self.addEventListener('activate', e => {
-  e.waitUntil(clients.claim());
+  console.log('[SW] Activating version', APP_VERSION);
+  e.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.filter(k => k !== CACHE_NAME).map(k => {
+          console.log('[SW] Deleting old cache:', k);
+          return caches.delete(k);
+        })
+      );
+    }).then(() => clients.claim())
+  );
 });
+
+// NETWORK-FIRST strategy: always try network, fall back to cache
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+
   e.respondWith(
-    caches.match(e.request).then(r => {
-      return r || fetch(e.request).then(response => {
-        if (e.request.method === 'GET' && response.status === 200) {
+    fetch(e.request)
+      .then(response => {
+        // Cache fresh response
+        if (response && response.status === 200) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
         }
         return response;
-      }).catch(() => caches.match('/'));
-    })
+      })
+      .catch(() => {
+        // Network failed - use cache
+        return caches.match(e.request).then(cached => {
+          return cached || caches.match('/');
+        });
+      })
   );
 });
+
+// Listen for skipWaiting message from client
+self.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
 `;
+
+let waitingWorker = null;
 
 if ('serviceWorker' in navigator) {
   const swBlob = new Blob([swCode], { type: 'application/javascript' });
   const swUrl = URL.createObjectURL(swBlob);
-  navigator.serviceWorker.register(swUrl).catch(err => console.log('SW registration:', err.message));
+
+  navigator.serviceWorker.register(swUrl).then(registration => {
+    console.log('[App] Service worker registered. Version:', APP_VERSION);
+
+    // Check for updates every time
+    registration.update();
+
+    // Check for updates periodically while open (every 30 min)
+    setInterval(() => {
+      registration.update();
+      checkForUpdate();
+    }, 30 * 60 * 1000);
+
+    // Listen for new SW waiting
+    registration.addEventListener('updatefound', () => {
+      const newWorker = registration.installing;
+      newWorker.addEventListener('statechange', () => {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          // New version available!
+          waitingWorker = newWorker;
+          showUpdateBanner();
+        }
+      });
+    });
+
+    // Detect controller change (after skipWaiting)
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
+    });
+  }).catch(err => console.log('SW registration failed:', err.message));
 }
+
+// ═══════════════════════════════════════════════════════════
+// 🔄 VERSION CHECK FROM SERVER
+// ═══════════════════════════════════════════════════════════
+async function checkForUpdate() {
+  try {
+    // Fetch current page from network (bypass cache) and read version
+    const response = await fetch(window.location.href, {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache' }
+    });
+    const text = await response.text();
+    const match = text.match(/<meta name="app-version" content="([^"]+)"/);
+    if (match) {
+      const serverVersion = match[1];
+      if (serverVersion !== APP_VERSION) {
+        console.log('[App] New version detected:', serverVersion, '(current:', APP_VERSION + ')');
+        showUpdateBanner(serverVersion);
+      }
+    }
+  } catch (err) {
+    console.log('[App] Update check failed (offline?)');
+  }
+}
+
+function showUpdateBanner(newVersion) {
+  const banner = document.getElementById('updateBanner');
+  if (newVersion) {
+    banner.querySelector('.update-desc').textContent = 'Version ' + newVersion + ' is ready';
+  }
+  banner.classList.add('show');
+}
+
+document.getElementById('updateBtn').addEventListener('click', () => {
+  const banner = document.getElementById('updateBanner');
+  banner.querySelector('.update-title').textContent = 'Updating...';
+  banner.querySelector('.update-desc').textContent = 'Please wait';
+
+  if (waitingWorker) {
+    waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+  } else {
+    // Force reload with cache bust
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  }
+});
+
+document.getElementById('updateBanner').addEventListener('click', (e) => {
+  if (e.target.id !== 'updateBtn') {
+    document.getElementById('updateBtn').click();
+  }
+});
+
+// Check for update on app load (after splash)
+setTimeout(checkForUpdate, 3000);
+
+// Check when app becomes visible (user returns to app)
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    checkForUpdate();
+  }
+});
 
 // ═══════════════════════════════════════════════════════════
 // STATE
@@ -1274,22 +1248,17 @@ let lastDeletedTask = null;
 let lastDeletedIndex = -1;
 let deferredInstallPrompt = null;
 
-// ═══════════════════════════════════════════════════════════
-// SPLASH SCREEN - Smart Display
-// ═══════════════════════════════════════════════════════════
+// SPLASH
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 const lastSplash = parseInt(localStorage.getItem('taskly_last_splash') || '0');
-const now = Date.now();
-const SPLASH_INTERVAL = 30 * 60 * 1000; // 30 minutes
-
-const shouldShowSplash = isStandalone || (now - lastSplash > SPLASH_INTERVAL);
+const SPLASH_INTERVAL = 30 * 60 * 1000;
+const shouldShowSplash = isStandalone || (Date.now() - lastSplash > SPLASH_INTERVAL);
 
 if (!shouldShowSplash) {
-  // Skip splash for quick browser refreshes
   document.getElementById('splashScreen').style.display = 'none';
   document.getElementById('app').classList.add('ready');
 } else {
-  localStorage.setItem('taskly_last_splash', String(now));
+  localStorage.setItem('taskly_last_splash', String(Date.now()));
   const splashDelay = isStandalone ? 2200 : 1900;
   window.addEventListener('load', () => {
     setTimeout(() => {
@@ -1302,13 +1271,10 @@ if (!shouldShowSplash) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
 // INSTALL PROMPT
-// ═══════════════════════════════════════════════════════════
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  // Show after splash completes
   setTimeout(() => {
     if (!localStorage.getItem('taskly_install_dismissed')) {
       document.getElementById('installPrompt').classList.add('show');
@@ -1320,9 +1286,7 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   if (deferredInstallPrompt) {
     deferredInstallPrompt.prompt();
     const { outcome } = await deferredInstallPrompt.userChoice;
-    if (outcome === 'accepted') {
-      showToast('🎉 Installing Taskly...');
-    }
+    if (outcome === 'accepted') showToast('🎉 Installing Taskly...');
     deferredInstallPrompt = null;
     document.getElementById('installPrompt').classList.remove('show');
   }
@@ -1333,7 +1297,6 @@ document.getElementById('installDismiss').addEventListener('click', () => {
   localStorage.setItem('taskly_install_dismissed', '1');
 });
 
-// iOS install detection
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 const isInStandalone = window.navigator.standalone === true;
 if (isIOS && !isInStandalone) {
@@ -1360,9 +1323,7 @@ window.addEventListener('appinstalled', () => {
   document.getElementById('installPrompt').classList.remove('show');
 });
 
-// ═══════════════════════════════════════════════════════════
 // INIT
-// ═══════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   checkRecurringResets();
   renderTasks();
@@ -1370,19 +1331,13 @@ document.addEventListener('DOMContentLoaded', () => {
   bindEvents();
 });
 
-function persist() {
-  localStorage.setItem('taskly_tasks', JSON.stringify(tasks));
-}
+function persist() { localStorage.setItem('taskly_tasks', JSON.stringify(tasks)); }
 
-// ═══════════════════════════════════════════════════════════
-// EVENTS
-// ═══════════════════════════════════════════════════════════
 function bindEvents() {
   document.getElementById('themeToggle').addEventListener('click', () => {
     document.documentElement.classList.toggle('light');
     const isLight = document.documentElement.classList.contains('light');
     document.getElementById('themeToggle').textContent = isLight ? '☀️' : '🌙';
-    // Update theme-color meta
     document.querySelector('meta[name="theme-color"]').setAttribute('content', isLight ? '#FFFFFF' : '#2563EB');
     destroyCharts();
     if (currentTab === 'dashboard') updateDashboard();
@@ -1418,29 +1373,21 @@ function bindEvents() {
   });
 
   document.getElementById('addTaskBtn').addEventListener('click', () => openModal());
-
   document.getElementById('taskModal').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeModal();
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// SWIPE TO DELETE
-// ═══════════════════════════════════════════════════════════
+// SWIPE
 function attachSwipe(card, taskId) {
   let startX = 0, startY = 0, currentX = 0;
-  let isDragging = false;
-  let swipeDirection = null;
-  const SWIPE_THRESHOLD = 100;
-  const MAX_SWIPE = 200;
+  let isDragging = false, swipeDirection = null;
+  const SWIPE_THRESHOLD = 100, MAX_SWIPE = 200;
 
   const onStart = (e) => {
     const touch = e.touches ? e.touches[0] : e;
-    startX = touch.clientX;
-    startY = touch.clientY;
-    currentX = 0;
-    isDragging = true;
-    swipeDirection = null;
+    startX = touch.clientX; startY = touch.clientY; currentX = 0;
+    isDragging = true; swipeDirection = null;
     card.classList.add('swiping');
   };
 
@@ -1449,11 +1396,9 @@ function attachSwipe(card, taskId) {
     const touch = e.touches ? e.touches[0] : e;
     const dx = touch.clientX - startX;
     const dy = touch.clientY - startY;
-
     if (!swipeDirection && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
       swipeDirection = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical';
     }
-
     if (swipeDirection === 'horizontal' && dx < 0) {
       if (e.cancelable) e.preventDefault();
       currentX = Math.max(dx, -MAX_SWIPE);
@@ -1465,15 +1410,13 @@ function attachSwipe(card, taskId) {
     if (!isDragging) return;
     isDragging = false;
     card.classList.remove('swiping');
-
     if (currentX < -SWIPE_THRESHOLD) {
       card.style.transform = 'translateX(-100%)';
       setTimeout(() => deleteTask(taskId), 200);
     } else {
       card.style.transform = 'translateX(0)';
     }
-    currentX = 0;
-    swipeDirection = null;
+    currentX = 0; swipeDirection = null;
   };
 
   card.addEventListener('touchstart', onStart, { passive: true });
@@ -1486,9 +1429,7 @@ function attachSwipe(card, taskId) {
   card.addEventListener('mouseleave', () => { if (isDragging) onEnd(); });
 }
 
-// ═══════════════════════════════════════════════════════════
 // MODAL
-// ═══════════════════════════════════════════════════════════
 function openModal(task) {
   const isEdit = !!task;
   document.getElementById('modalTitle').textContent = isEdit ? 'Edit Task' : 'New Task';
@@ -1499,9 +1440,7 @@ function openModal(task) {
   document.getElementById('taskCategory').value = isEdit ? task.category || 'personal' : 'personal';
   document.getElementById('editTaskId').value = isEdit ? task.id : '';
   editingId = isEdit ? task.id : null;
-
   setPriority(isEdit ? task.priority || 'medium' : 'medium');
-
   const r = task && task.repeat ? task.repeat : {};
   selectedWeekdays = r.weekdays ? [...r.weekdays] : [];
   document.getElementById('repeatEvery').value = r.every || 1;
@@ -1509,18 +1448,13 @@ function openModal(task) {
   document.getElementById('repeatEndDate').value = r.endDate || '';
   document.getElementById('repeatEndCount').value = r.endCount || 10;
   document.getElementById('resetTime').value = r.resetTime || '00:00';
-
   setRepeatType(r.type || 'none');
   setRepeatEnd(r.endType || 'never');
   renderWeekdayPicker();
   updateRepeatSummary();
-
   const list = document.getElementById('subtaskList');
   list.innerHTML = '';
-  if (isEdit && task.subtasks) {
-    task.subtasks.forEach(st => addSubtaskField(st.text, st.done));
-  }
-
+  if (isEdit && task.subtasks) task.subtasks.forEach(st => addSubtaskField(st.text, st.done));
   document.getElementById('taskModal').classList.add('open');
 }
 
@@ -1537,27 +1471,21 @@ function setPriority(p) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// REPEAT
-// ═══════════════════════════════════════════════════════════
 function setRepeatType(type) {
   currentRepeatType = type;
   document.querySelectorAll('#repeatTypeRow .repeat-type-chip').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.repeat === type);
   });
-
   const isNone = type === 'none';
   const isCustom = type === 'custom';
   const isWeekly = type === 'weekly';
   const unit = document.getElementById('repeatUnit').value;
   const showWeekdays = isWeekly || (isCustom && unit === 'weeks');
-
   document.getElementById('customIntervalRow').classList.toggle('hidden', !isCustom);
   document.getElementById('weekdayPickerWrap').classList.toggle('hidden', !showWeekdays);
   document.getElementById('repeatEndSection').classList.toggle('hidden', isNone);
   document.getElementById('resetTimeRow').classList.toggle('hidden', isNone);
   document.getElementById('repeatSummary').classList.toggle('hidden', isNone);
-
   if (!isNone) updateRepeatSummary();
 }
 
@@ -1594,10 +1522,8 @@ function updateRepeatSummary() {
     document.getElementById('repeatSummary').classList.add('hidden');
     return;
   }
-
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   let text = '';
-
   switch (currentRepeatType) {
     case 'daily': text = 'Repeats every day'; break;
     case 'weekly': {
@@ -1619,7 +1545,6 @@ function updateRepeatSummary() {
       break;
     }
   }
-
   switch (currentRepeatEnd) {
     case 'never': text += ', forever'; break;
     case 'date': {
@@ -1633,12 +1558,8 @@ function updateRepeatSummary() {
       break;
     }
   }
-
   const resetTime = document.getElementById('resetTime').value;
-  if (resetTime && resetTime !== '00:00') {
-    text += ' (resets at ' + formatTime12(resetTime) + ')';
-  }
-
+  if (resetTime && resetTime !== '00:00') text += ' (resets at ' + formatTime12(resetTime) + ')';
   document.getElementById('repeatSummaryText').textContent = text;
   document.getElementById('repeatSummary').classList.remove('hidden');
 }
@@ -1646,13 +1567,9 @@ function updateRepeatSummary() {
 function formatTime12(t) {
   if (!t) return '';
   const [h, m] = t.split(':').map(Number);
-  const ampm = h >= 12 ? 'PM' : 'AM';
-  return (h % 12 || 12) + ':' + String(m).padStart(2, '0') + ' ' + ampm;
+  return (h % 12 || 12) + ':' + String(m).padStart(2, '0') + ' ' + (h >= 12 ? 'PM' : 'AM');
 }
 
-// ═══════════════════════════════════════════════════════════
-// SUBTASKS
-// ═══════════════════════════════════════════════════════════
 function addSubtaskField(text, done) {
   const list = document.getElementById('subtaskList');
   const item = document.createElement('div');
@@ -1671,13 +1588,9 @@ function getSubtasks() {
   })).filter(st => st.text);
 }
 
-// ═══════════════════════════════════════════════════════════
-// SAVE
-// ═══════════════════════════════════════════════════════════
 function saveTask() {
   const name = document.getElementById('taskName').value.trim();
   if (!name) { showToast('⚠️ Please enter a task name'); return; }
-
   let repeatData = null;
   if (currentRepeatType !== 'none') {
     repeatData = {
@@ -1693,41 +1606,28 @@ function saveTask() {
     if (currentRepeatType === 'weekly' || (currentRepeatType === 'custom' && repeatData.unit === 'weeks')) {
       repeatData.weekdays = [...selectedWeekdays];
     }
-    if (currentRepeatEnd === 'date') {
-      repeatData.endDate = document.getElementById('repeatEndDate').value;
-    } else if (currentRepeatEnd === 'count') {
-      repeatData.endCount = parseInt(document.getElementById('repeatEndCount').value) || 10;
-    }
+    if (currentRepeatEnd === 'date') repeatData.endDate = document.getElementById('repeatEndDate').value;
+    else if (currentRepeatEnd === 'count') repeatData.endCount = parseInt(document.getElementById('repeatEndCount').value) || 10;
   }
-
   const existing = editingId ? tasks.find(t => t.id === editingId) : null;
   const task = {
     id: editingId || Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-    name: name,
-    description: document.getElementById('taskDesc').value.trim(),
+    name, description: document.getElementById('taskDesc').value.trim(),
     dueDate: document.getElementById('taskDue').value,
     dueTime: document.getElementById('taskTime').value,
     category: document.getElementById('taskCategory').value,
-    priority: currentPriority,
-    repeat: repeatData,
+    priority: currentPriority, repeat: repeatData,
     subtasks: getSubtasks(),
     completed: existing ? existing.completed : false,
     createdAt: existing ? existing.createdAt : new Date().toISOString(),
     completedAt: existing ? existing.completedAt : null,
     lastResetAt: existing ? existing.lastResetAt : null
   };
-
-  if (repeatData && existing && existing.repeat) {
-    task.repeat.completedCount = existing.repeat.completedCount || 0;
-  }
-
+  if (repeatData && existing && existing.repeat) task.repeat.completedCount = existing.repeat.completedCount || 0;
   if (editingId) {
     const idx = tasks.findIndex(t => t.id === editingId);
     if (idx !== -1) tasks[idx] = task;
-  } else {
-    tasks.unshift(task);
-  }
-
+  } else tasks.unshift(task);
   persist();
   renderTasks();
   updateDashboard();
@@ -1735,19 +1635,14 @@ function saveTask() {
   showToast(editingId ? '✅ Task updated' : '✅ Task created');
 }
 
-// ═══════════════════════════════════════════════════════════
-// RECURRING RESET
-// ═══════════════════════════════════════════════════════════
 function checkRecurringResets() {
   const now = new Date();
   let changed = false;
-
   tasks.forEach(task => {
     if (!task.repeat || !task.completed) return;
     const r = task.repeat;
     if (r.endType === 'count' && (r.completedCount || 0) >= (r.endCount || Infinity)) return;
     if (r.endType === 'date' && r.endDate && new Date(r.endDate + 'T23:59:59') < now) return;
-
     const nextReset = calcNextReset(task);
     if (nextReset && now >= nextReset) {
       task.completed = false;
@@ -1758,7 +1653,6 @@ function checkRecurringResets() {
       changed = true;
     }
   });
-
   if (changed) { persist(); renderTasks(); }
 }
 
@@ -1768,7 +1662,6 @@ function calcNextReset(task) {
   const resetParts = (task.repeat.resetTime || '00:00').split(':').map(Number);
   const r = task.repeat;
   const next = new Date(completed);
-
   switch (r.type) {
     case 'daily':   next.setDate(next.getDate() + 1); break;
     case 'weekly':  next.setDate(next.getDate() + 7); break;
@@ -1814,45 +1707,27 @@ function advanceDueDate(task) {
 
 setInterval(checkRecurringResets, 60000);
 
-// ═══════════════════════════════════════════════════════════
-// TOGGLE
-// ═══════════════════════════════════════════════════════════
 function toggleTask(id) {
   const task = tasks.find(t => t.id === id);
   if (!task) return;
-
   task.completed = !task.completed;
   task.completedAt = task.completed ? new Date().toISOString() : null;
-
-  if (task.completed && task.repeat) {
-    task.repeat.completedCount = (task.repeat.completedCount || 0) + 1;
-  }
-
+  if (task.completed && task.repeat) task.repeat.completedCount = (task.repeat.completedCount || 0) + 1;
   if (task.completed) {
     const card = document.querySelector('[data-id="' + id + '"]');
     if (card) card.classList.add('completing');
     fireConfetti();
   }
-
   persist();
-  setTimeout(() => {
-    renderTasks();
-    updateDashboard();
-  }, task.completed ? 500 : 50);
-
+  setTimeout(() => { renderTasks(); updateDashboard(); }, task.completed ? 500 : 50);
   showToast(task.completed ? '🎉 Task completed!' : '↩️ Task reopened');
 }
 
-// ═══════════════════════════════════════════════════════════
-// DELETE
-// ═══════════════════════════════════════════════════════════
 function deleteTask(id) {
   const idx = tasks.findIndex(t => t.id === id);
   if (idx === -1) return;
-
   lastDeletedTask = tasks[idx];
   lastDeletedIndex = idx;
-
   const wrap = document.querySelector('.task-card-wrap[data-wrap-id="' + id + '"]');
   if (wrap) {
     wrap.classList.add('collapsing');
@@ -1868,7 +1743,6 @@ function deleteTask(id) {
     renderTasks();
     updateDashboard();
   }
-
   showToastWithUndo('🗑️ Task deleted', () => {
     if (lastDeletedTask) {
       tasks.splice(lastDeletedIndex, 0, lastDeletedTask);
@@ -1881,14 +1755,10 @@ function deleteTask(id) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// RENDER
-// ═══════════════════════════════════════════════════════════
 function renderTasks() {
   const container = document.getElementById('taskList');
   const searchQuery = (document.getElementById('searchInput').value || '').toLowerCase();
   let filtered = [...tasks];
-
   if (searchQuery) {
     filtered = filtered.filter(t =>
       t.name.toLowerCase().includes(searchQuery) ||
@@ -1896,7 +1766,6 @@ function renderTasks() {
       t.category.toLowerCase().includes(searchQuery)
     );
   }
-
   switch (currentFilter) {
     case 'active':    filtered = filtered.filter(t => !t.completed); break;
     case 'completed': filtered = filtered.filter(t => t.completed); break;
@@ -1905,9 +1774,7 @@ function renderTasks() {
     case 'low':       filtered = filtered.filter(t => t.priority === 'low'); break;
     case 'recurring': filtered = filtered.filter(t => t.repeat && t.repeat.type !== 'none'); break;
   }
-
   document.getElementById('taskCount').textContent = filtered.length;
-
   if (filtered.length === 0) {
     container.innerHTML =
       '<div class="empty-state">' +
@@ -1918,13 +1785,11 @@ function renderTasks() {
         '</p></div>';
     return;
   }
-
   container.innerHTML = filtered.map((task, i) => {
     const pColor = { high: 'var(--danger)', medium: 'var(--warn)', low: 'var(--success)' }[task.priority] || 'var(--border)';
     const catColors = { personal: '#6C63FF', work: '#F59E0B', health: '#22D3A5', finance: '#F87171', education: '#A78BFA', other: '#8B8FA8' };
     const catColor = catColors[task.category] || '#8B8FA8';
     const overdue = task.dueDate && !task.completed && new Date(task.dueDate + 'T23:59:59') < new Date();
-
     let subtaskHtml = '';
     if (task.subtasks && task.subtasks.length > 0) {
       const done = task.subtasks.filter(s => s.done).length;
@@ -1935,16 +1800,15 @@ function renderTasks() {
           '<div class="subtask-bar"><div class="subtask-fill" style="width:' + pct + '%"></div></div>' +
         '</div>';
     }
-
     let repeatHtml = '';
     if (task.repeat && task.repeat.type !== 'none') {
       const r = task.repeat;
       let label = '';
       switch (r.type) {
-        case 'daily':   label = 'Daily'; break;
-        case 'weekly':  label = 'Weekly'; break;
+        case 'daily': label = 'Daily'; break;
+        case 'weekly': label = 'Weekly'; break;
         case 'monthly': label = 'Monthly'; break;
-        case 'yearly':  label = 'Yearly'; break;
+        case 'yearly': label = 'Yearly'; break;
         case 'custom':
           label = 'Every ' + (r.every || 1) + ' ' + ((r.every || 1) === 1 ? (r.unit || 'days').replace(/s$/, '') : (r.unit || 'days'));
           break;
@@ -1958,22 +1822,14 @@ function renderTasks() {
         if (nextReset) repeatHtml += '<div class="next-reset-info">↻ Resets ' + nextReset.toLocaleString() + '</div>';
       }
     }
-
     return '<div class="task-card-wrap" data-wrap-id="' + task.id + '" style="animation-delay:' + (i * 40) + 'ms">' +
-      '<div class="swipe-actions">' +
-        '<div class="swipe-action-content">' +
-          '<span class="icon">🗑️</span>' +
-          '<span>Delete</span>' +
-        '</div>' +
-      '</div>' +
+      '<div class="swipe-actions"><div class="swipe-action-content"><span class="icon">🗑️</span><span>Delete</span></div></div>' +
       '<div class="task-card ' + (task.completed ? 'completed' : '') + '" data-id="' + task.id + '">' +
         '<div class="task-priority-bar" style="background:' + pColor + '"></div>' +
         '<div class="task-top">' +
           '<div class="check-wrap">' +
             '<button class="check-btn ' + (task.completed ? 'done' : '') + '" onclick="event.stopPropagation();toggleTask(\'' + task.id + '\')">' +
-              '<svg width="12" height="10" viewBox="0 0 12 10" fill="none">' +
-                '<path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
-              '</svg>' +
+              '<svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
             '</button>' +
           '</div>' +
           '<div class="task-body">' +
@@ -1995,11 +1851,7 @@ function renderTasks() {
       '</div>' +
     '</div>';
   }).join('');
-
-  document.querySelectorAll('.task-card').forEach(card => {
-    const id = card.dataset.id;
-    attachSwipe(card, id);
-  });
+  document.querySelectorAll('.task-card').forEach(card => attachSwipe(card, card.dataset.id));
 }
 
 function editTask(id) {
@@ -2017,23 +1869,18 @@ function escapeAttr(str) {
   return (str || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-// ═══════════════════════════════════════════════════════════
-// DASHBOARD
-// ═══════════════════════════════════════════════════════════
 function updateDashboard() {
   const total = tasks.length;
   const done = tasks.filter(t => t.completed).length;
   const pending = total - done;
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;
   const recurring = tasks.filter(t => t.repeat && t.repeat.type !== 'none').length;
-
   document.getElementById('statTotal').textContent = total;
   document.getElementById('statDone').textContent = done;
   document.getElementById('statPending').textContent = pending;
   document.getElementById('progressPct').textContent = pct + '%';
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('recurringVal').textContent = recurring;
-
   let streak = 0;
   const today = new Date();
   for (let i = 0; i < 365; i++) {
@@ -2044,7 +1891,6 @@ function updateDashboard() {
     else if (i > 0) break;
   }
   document.getElementById('streakVal').textContent = streak;
-
   renderCharts();
 }
 
@@ -2056,11 +1902,9 @@ function destroyCharts() {
 function renderCharts() {
   destroyCharts();
   const tc = getComputedStyle(document.documentElement).getPropertyValue('--text2').trim();
-
   const high = tasks.filter(t => t.priority === 'high').length;
   const med = tasks.filter(t => t.priority === 'medium').length;
   const low = tasks.filter(t => t.priority === 'low').length;
-
   const pCtx = document.getElementById('priorityChart');
   if (pCtx) {
     priorityChart = new Chart(pCtx, {
@@ -2069,7 +1913,6 @@ function renderCharts() {
       options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: tc, padding: 12, font: { size: 11 } } } } }
     });
   }
-
   const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const weekData = new Array(7).fill(0);
   const now = new Date();
@@ -2079,7 +1922,6 @@ function renderCharts() {
       if (Math.floor((now - d) / 86400000) < 7) weekData[d.getDay()]++;
     }
   });
-
   const wCtx = document.getElementById('weeklyChart');
   if (wCtx) {
     weeklyChart = new Chart(wCtx, {
@@ -2097,9 +1939,6 @@ function renderCharts() {
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-// CALENDAR
-// ═══════════════════════════════════════════════════════════
 function renderCalendar() {
   const container = document.getElementById('calendarView');
   const now = new Date();
@@ -2108,7 +1947,6 @@ function renderCalendar() {
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const monthName = now.toLocaleString('default', { month: 'long', year: 'numeric' });
-
   let html = '<div style="text-align:center;font-size:16px;font-weight:700;margin-bottom:16px;">' + monthName + '</div>';
   html += '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;">';
   ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(d => {
@@ -2125,23 +1963,18 @@ function renderCalendar() {
       (isToday ? 'background:var(--accent);color:#fff;font-weight:700;' : '') +
       (hasTasks && !isToday ? 'background:var(--surface2);' : '') +
       'font-size:13px;position:relative;cursor:pointer;" title="' + dayTasks.map(t => t.name).join(', ') + '">' +
-      day +
-      (hasTasks ? '<div style="width:5px;height:5px;border-radius:50%;background:' + (hasRecurring ? 'var(--accent2)' : 'var(--success)') + ';margin:2px auto 0;"></div>' : '') +
+      day + (hasTasks ? '<div style="width:5px;height:5px;border-radius:50%;background:' + (hasRecurring ? 'var(--accent2)' : 'var(--success)') + ';margin:2px auto 0;"></div>' : '') +
     '</div>';
   }
   html += '</div>';
   container.innerHTML = html;
 }
 
-// ═══════════════════════════════════════════════════════════
-// CONFETTI
-// ═══════════════════════════════════════════════════════════
 function fireConfetti() {
   const canvas = document.getElementById('confetti-canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
   const particles = Array.from({ length: 60 }, () => ({
     x: canvas.width / 2, y: canvas.height / 2,
     vx: (Math.random() - 0.5) * 16, vy: Math.random() * -14 - 4,
@@ -2149,7 +1982,6 @@ function fireConfetti() {
     color: ['#6C63FF', '#A78BFA', '#22D3A5', '#F59E0B', '#F87171', '#fff'][Math.floor(Math.random() * 6)],
     life: 1, rotation: Math.random() * 360
   }));
-
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let alive = false;
@@ -2172,9 +2004,6 @@ function fireConfetti() {
   animate();
 }
 
-// ═══════════════════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════════════════
 function showToast(msg) {
   const container = document.getElementById('toastContainer');
   const toast = document.createElement('div');
